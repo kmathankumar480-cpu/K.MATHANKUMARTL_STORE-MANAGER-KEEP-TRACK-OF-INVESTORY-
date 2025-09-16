@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Inventory Management</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+  <nav>
+    <button id="navHome" class="active">Home</button>
+    <button id="navCart">Cart</button>
+    <button id="navInventory">Inventory</button>
+    <button id="navSales">Sales</button>
+    <button id="navAdd">Add Product</button>
+  </nav>
+  <div class="brand">Inventory Management</div>
+</header>
+
+<main class="container">
+
+  <!-- Home -->
+  <section id="homeSection">
+    <h1>Product Catalog</h1>
+    <div class="searchWrap">
+      <input id="searchInput" placeholder="Search products...">
+    </div>
+    <div id="catalog" class="grid"></div>
+  </section>
+
+  <!-- Cart -->
+  <section id="cartSection" style="display:none;">
+    <h1>Your Cart</h1>
+    <div class="cartArea">
+      <div class="cartHeader">
+        <div>Items: <span id="cartCount">0</span> | Total: ₹ <span id="cartValue">0.00</span></div>
+        <div>
+          <button id="checkoutBtn" class="btn btn-green">Checkout</button>
+          <button id="clearCartBtn" class="btn btn-red">Clear</button>
+        </div>
+      </div>
+      <div id="cartItems" class="cartItems"></div>
+    </div>
+  </section>
+
+  <!-- Inventory -->
+  <section id="inventorySection" style="display:none;">
+    <h1>Inventory</h1>
+    <div class="inventoryFilters">
+      <input id="inventorySearch" placeholder="Search inventory...">
+      <label>Alert Value <input type="number" id="alertValue" value="10" style="width:60px"></label>
+      <label><input type="checkbox" id="showOnlyDepleted"> Show Only Depleted</label>
+    </div>
+    <div id="inventoryGrid" class="grid"></div>
+  </section>
+
+  <!-- Sales -->
+  <section id="salesSection" style="display:none;">
+    <h1>Sales Record</h1>
+    <div id="salesLog"></div>
+  </section>
+
+  <!-- Add Product -->
+  <section id="addProductSection" style="display:none;">
+    <h1>Add New Product</h1>
+    <form id="addProductForm" class="formCard">
+      <input type="text" id="newTitle" placeholder="Product Name" required>
+      <input type="file" id="newImage" accept="image/*" required>
+      <input type="number" id="newPrice" placeholder="Price" required>
+      <input type="number" id="newStock" placeholder="Stock" required>
+      <input type="text" id="newTags" placeholder="Tags (comma-separated)">
+      <button type="submit" class="btn btn-green" style="width:100%">Add Product</button>
+    </form>
+  </section>
+
+</main>
+
+<footer>© Inventory Management — Demo</footer>
+
+<script src="script.js"></script>
+</body>
+</html>
