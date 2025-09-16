@@ -1,0 +1,203 @@
+// Data
+let PRODUCTS=[
+  {id:1,title:"Sample Item",price:0.00,image:"image/sample item.jpg",stock:9,tags:[]},
+  {id:2,title:"kurkure",price:20.00,image:"image/image1.jpg",stock:5,tags:["electronics"]},
+  {id:3,title:"fortune",price:500.00,image:"image/image4.jpg",stock:94,tags:["grocery"]},
+  {id:4,title:"7up",price:200.00,image:"image/image6.jpg",stock:42,tags:["grocery"]}
+];
+let cart={};
+let sales=[];
+
+// DOM references
+const catalogEl=document.getElementById("catalog");
+const searchInput=document.getElementById("searchInput");
+const cartItemsEl=document.getElementById("cartItems");
+const cartCountEl=document.getElementById("cartCount");
+const cartValueEl=document.getElementById("cartValue");
+const inventoryGrid=document.getElementById("inventoryGrid");
+const inventorySearch=document.getElementById("inventorySearch");
+const alertValue=document.getElementById("alertValue");
+const showOnlyDepleted=document.getElementById("showOnlyDepleted");
+const salesLog=document.getElementById("salesLog");
+
+// Catalog
+function renderCatalog(filter=""){
+  catalogEl.innerHTML="";
+  const list=PRODUCTS.filter(p=>p.title.toLowerCase().includes(filter.toLowerCase()));
+  if(list.length===0){
+    catalogEl.innerHTML="<p style='text-align:center;color:#6b7280'>No products found</p>";
+    return;
+  }
+  list.forEach(p=>{
+    const div=document.createElement("div");
+    div.className="card";
+    if(cart[p.id]) div.classList.add("selected"); // highlight if in cart
+    div.innerHTML=`
+      <div class="title">${p.title}</div>
+      <div class="media"><img src="${p.image}"></div>
+      <div class="meta">
+        <div class="price">Price: ₹ ${p.price.toFixed(2)}</div>
+        <button class="btn btn-green" onclick="addToCart(${p.id})">Add to Cart</button>
+      </div>`;
+    catalogEl.appendChild(div);
+  });
+}
+
+// Cart
+function renderCart(){
+  cartItemsEl.innerHTML="";
+  let total=0,count=0;
+  for(const id in cart){
+    const p=PRODUCTS.find(x=>x.id==id);
+    const qty=cart[id];
+    total+=p.price*qty;
+    count+=qty;
+    const div=document.createElement("div");
+    div.className="cartItem";
+    div.innerHTML=`
+      <b>${p.title}</b>
+      <div>Qty: ${qty}</div>
+      <div>₹ ${(p.price*qty).toFixed(2)}</div>
+      <button class="btn btn-red" onclick="removeFromCart(${p.id})">Remove</button>`;
+    cartItemsEl.appendChild(div);
+  }
+  cartCountEl.textContent=count;
+  cartValueEl.textContent=total.toFixed(2);
+  renderCatalog(searchInput.value); // re-render to update highlights
+}
+function addToCart(id){ cart[id]=(cart[id]||0)+1; renderCart(); }
+function removeFromCart(id){ delete cart[id]; renderCart(); }
+function clearCart(){ cart={}; renderCart(); }
+document.getElementById("clearCartBtn").onclick=()=>{clearCart()};
+document.getElementById("checkoutBtn").onclick=()=>{
+  if(Object.keys(cart).length===0){alert("Cart empty");return;}
+  let total=0;
+  const details=[];
+  for(const id in cart){
+    const p=PRODUCTS.find(x=>x.id==id);
+    const qty=cart[id];
+    p.stock-=qty;
+    total+=p.price*qty;
+    details.push({title:p.title,qty,amount:p.price*qty});
+  }
+  sales.push({id:sales.length+1,total,details,date:new Date()});
+  alert("Sale completed!");
+  cart={};
+  renderCart();
+  renderInventory();
+  renderSales();
+};
+
+// Inventory
+function renderInventory(){
+  inventoryGrid.innerHTML="";
+  const filter=inventorySearch.value.toLowerCase();
+  const list=PRODUCTS.filter(p=>{
+    if(showOnlyDepleted.checked && p.stock>0) return false;
+    if(filter && !p.title.toLowerCase().includes(filter)) return false;
+    return true;
+  });
+  list.forEach(p=>{
+    const low=p.stock<=Number(alertValue.value);
+    const div=document.createElement("div");
+    div.className="card";
+    div.style.border=low?"2px solid red":"1px solid #e6e6e6";
+    div.style.background=low?"#ffecec":"white";
+    div.innerHTML=`
+      <div class="title">${p.title}</div>
+      <div class="media"><img src="${p.image}"></div>
+      <div class="meta">
+        <div class="price">Price: ₹ ${p.price.toFixed(2)}</div>
+        <div>Stock Available: ${p.stock}</div>
+        <input type="number" id="addStock${p.id}" placeholder="Add Stock" style="margin:8px 0">
+        <button class="btn btn-green" onclick="updateStock(${p.id})">Update Stock</button>
+      </div>`;
+    inventoryGrid.appendChild(div);
+  });
+}
+function updateStock(id){
+  const input=document.getElementById("addStock"+id);
+  const qty=Number(input.value)||0;
+  const p=PRODUCTS.find(x=>x.id==id);
+  p.stock+=qty;
+  input.value="";
+  renderInventory();
+}
+
+// Sales
+function renderSales(){
+  salesLog.innerHTML="";
+  sales.forEach(s=>{
+    const div=document.createElement("div");
+    div.className="salesRecord";
+    div.innerHTML=`
+      <b>Sale #${s.id}</b> — ${s.date.toLocaleString()}<br>
+      <b>Total Sale Value:</b> ₹ ${s.total.toFixed(2)}<br>
+      <b>Cart Details:</b>
+      <ul>${s.details.map(d=>`<li>${d.title} (${d.qty}) - ₹ ${d.amount.toFixed(2)}</li>`).join("")}</ul>
+    `;
+    salesLog.appendChild(div);
+  });
+}
+
+// Add product
+document.getElementById("addProductForm").onsubmit=(e)=>{
+  e.preventDefault();
+  const title=document.getElementById("newTitle").value;
+  const fileInput=document.getElementById("newImage");
+  const file=fileInput.files[0];
+  let image="";
+  if(file){
+    image="images/" + file.name;  // local path to your images folder
+  }
+  const price=parseFloat(document.getElementById("newPrice").value);
+  const stock=parseInt(document.getElementById("newStock").value);
+  const tags=document.getElementById("newTags").value.split(",").map(s=>s.trim());
+
+  PRODUCTS.push({id:PRODUCTS.length+1,title,image,price,stock,tags});
+  alert("Product added!");
+  e.target.reset();
+  showSection("home");
+  renderCatalog();
+  renderInventory();
+};
+
+// Nav switching
+const sections={
+  home:document.getElementById("homeSection"),
+  cart:document.getElementById("cartSection"),
+  inventory:document.getElementById("inventorySection"),
+  sales:document.getElementById("salesSection"),
+  add:document.getElementById("addProductSection"),
+};
+const buttons={
+  home:document.getElementById("navHome"),
+  cart:document.getElementById("navCart"),
+  inventory:document.getElementById("navInventory"),
+  sales:document.getElementById("navSales"),
+  add:document.getElementById("navAdd"),
+};
+function showSection(name){
+  for(const k in sections){sections[k].style.display=(k===name)?"block":"none";}
+  for(const k in buttons){buttons[k].classList.remove("active");}
+  buttons[name].classList.add("active");
+}
+buttons.home.onclick=()=>showSection("home");
+buttons.cart.onclick=()=>showSection("cart");
+buttons.inventory.onclick=()=>showSection("inventory");
+buttons.sales.onclick=()=>showSection("sales");
+buttons.add.onclick=()=>showSection("add");
+
+// Filters
+inventorySearch.addEventListener("input",renderInventory);
+alertValue.addEventListener("input",renderInventory);
+showOnlyDepleted.addEventListener("change",renderInventory);
+
+// Search event fix
+searchInput.addEventListener("input",()=>renderCatalog(searchInput.value));
+
+// Init
+renderCatalog();
+renderCart();
+renderInventory();
+renderSales();
