@@ -1,0 +1,192 @@
+📘 Store Manager – Keep Track of Inventory
+
+Page 1 – Title Page
+
+Project Title: Store Manager – Keep Track of Inventory
+
+Team Leader: Mathankumar
+
+Team Members: Prasath, Chandru,madhankumar
+
+Page 2 – Abstract
+
+This project is an Inventory Management System designed for stores. It allows managers to add, update, and delete product details, track stock levels, generate reports, and receive alerts when stock is low. The system reduces manual errors, saves time, and improves overall store efficiency.
+
+
+Page 3 – Introduction
+
+Inventory management is one of the most critical tasks in store operations. Manual methods are error-prone, time-consuming, and unreliable. With this digital Store Manager System, managers can easily maintain product details (ID, name, price, quantity), view stock levels in real time, and take quick decisions based on accurate data.
+
+Page 4 – Problem Definition
+
+Current Problems:
+
+Manual entries cause frequent errors.
+
+Shortages are not noticed until too late.
+
+Overstocking leads to wastage and storage issues.
+
+Report generation takes too much time.
+
+
+Solution:
+A computerized Store Manager Application is required to address these issues.
+
+
+Page 5 – Objectives
+
+Create, update, and delete product records.
+
+Maintain real-time stock availability.
+
+Provide low-stock alerts.
+
+Generate stock and product reports.
+
+Ensure user-friendly operation.
+
+
+Page 6 – Scope
+
+The project is mainly intended for small and medium-sized stores.
+Current Features: Product management, stock tracking, reporting, alerts.
+Future Enhancements: Barcode scanning, billing system, cloud backup, and a mobile app.
+
+
+Page 7 – System Requirements
+
+Hardware:
+
+Processor: 1.6 GHz or higher
+
+RAM: Minimum 2 GB
+
+Storage: 2 GB free
+
+
+Software:
+
+Frontend: HTML, CSS, JavaScript
+
+Backend: PHP / Node.js
+
+Database: MySQL / SQLite
+
+Tools: VS Code, Web Browser
+
+
+Page 8 – System Architecture
+
+The system works in 4 layers:
+
+1.	Input Layer: User inputs product details (ID, Name, Quantity, Price).
+
+
+2.	Process Layer: CRUD operations (Create, Read, Update, Delete) and stock management.
+
+
+3.	Database Layer: Stores product and inventory details.
+
+
+4.	Output Layer: Displays tables, alerts, and reports.
+
+
+Page 9 – Data Flow Diagram (DFD)
+
+Level 0:
+
+User → Store Manager System → Database → Reports/Alerts → User
+
+
+Level 1:
+
+Add Product → Save in DB
+
+Update Product → Modify DB
+
+Delete Product → Remove DB
+
+View Stock → Retrieve DB
+
+
+Page 10 – Features
+
+Add products with name, ID, price, and quantity.
+
+Update existing product details.
+
+Delete products not in use.
+
+Display stock list in tables.
+
+Search and filter products.
+
+Generate stock reports.
+
+Low-stock alerts.
+
+
+Page 11 – Screenshots
+
+(This page can include images of the project UI, such as
+
+Product Entry Form
+
+Inventory Table
+
+Search/Filter Option
+
+Low Stock Alert
+
+
+Page 12 – Advantages
+
+Easy to use.
+
+Reduces paperwork.
+
+Saves time and effort.
+
+Real-time stock information.
+
+Fewer manual errors.
+
+
+Page 13 – Limitations
+
+Works only on a local system (without server/cloud).
+
+No advanced analytics in the basic version.
+
+No mobile app support.
+
+Limited to basic CRUD operations.
+
+
+Page 14 – Future Enhancements
+
+Integration with barcode scanners.
+
+Complete billing system support.
+
+Cloud backup and synchronization.
+
+Mobile application for Android/iOS.
+
+AI-based stock prediction.
+
+Page 15 – Conclusion
+
+The Store Manager Inventory System provides an effective and reliable way to manage stock. It eliminates manual errors, improves accuracy, and saves time. With future improvements like billing, cloud, and mobile support, it can evolve into a complete Store Management Solution.
+
+This project is completed this member 
+Mathankumar-coding
+Prasath - ppt
+Chandru - document 
+Madhankumar- document 
+
+
+
+
+
