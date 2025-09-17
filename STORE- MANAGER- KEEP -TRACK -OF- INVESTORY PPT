@@ -1,0 +1,71 @@
+Introduction
+Inventory management is one of the most
+critical tasks in store operations. Manual methods
+are error-prone, time-consuming, and unreliable.
+With this digital Store Manager System, managers
+can easily maintain product details (ID, name,
+price, quantity), view stock levels in real time, and
+take quick decisions based on accurate data.
+
+Abstract
+This project is an Inventory Management
+System designed for stores. It allows managers
+to add, update, and delete product details, track
+stock levels, generate reports, and receive alerts
+when stock is low. The system reduces manual
+errors, saves time, and improves overall store
+efficiency.
+
+Problem Definition
+Current Problems:
+Solution:
+Manual entries cause frequent errors.
+Shortages are not noticed until too late.
+Overstocking leads to wastage and storage issues.
+Report generation takes too much time.
+A computerized Store Manager Applicationis required to address these issues.
+
+Objectives
+Create, update, and delete product records.
+Maintain real-time stock availability.
+Provide low-stock alerts.
+Generate stock and product reports.
+. Ensure user-friendly operation.
+
+Features
+Add products with name, ID, price, and quantity.
+Update existing product details.
+Delete products not in use.
+Display stock list in tables.
+Search and filter products.
+Generate stock reports.
+Low-stock alerts.
+
+Advantages
+Easy to use.
+Reduces paperwork.
+Saves time and effort.
+Real-time stock information.
+Fewer manual errors.
+
+Limitations
+Works only on a local system.
+No advanced analytics in the basic version.
+No mobile app support.
+Limited to basic CRUD operations.
+
+Future Enhancements
+Integration with barcode scanners.
+Complete billing system support.
+Cloud backup and synchronization.
+Mobile application for Android/iOS.
+AI-based stock prediction.
+
+Conclusion
+The Store Manager Inventory System
+provides an effective and reliable way to
+manage stock. It eliminates manual errors,
+improves accuracy, and saves time. With
+future improvements like billing, cloud, and
+mobile support, it can evolve into a complete
+Store Management Solution.
